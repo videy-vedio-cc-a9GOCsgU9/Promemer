@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="metaTitle">Loading… — ProMemer</title>
+<meta name="description" id="metaDesc" content="">
+<meta name="keywords" id="metaKeys" content="">
+<link rel="canonical" id="metaCanonical" href="https://promemer.top">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ProMemer">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDesc" content="">
+<meta property="og:image" id="ogImage" content="">
+<meta property="og:url" id="ogUrl" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="">
+<meta name="twitter:description" id="twDesc" content="">
+<meta name="twitter:image" id="twImage" content="">
+<script type="application/ld+json" id="jsonLd"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0F;--bg2:#111118;--bg3:#18181F;--line:#2A2A38;--text:#F0F0F5;--dim:#70708A;--accent:#6C63FF;--accent2:#A89DFF;--green:#34D399;--radius:16px;--shadow:0 8px 32px rgba(0,0,0,0.45);--trans:.22s cubic-bezier(.4,0,.2,1);}
+html[data-theme="light"]{--bg:#F8F8FC;--bg2:#FFFFFF;--bg3:#EFEFF7;--line:#E2E2EE;--text:#0A0A0F;--dim:#7070A0;--shadow:0 8px 32px rgba(108,99,255,0.10);}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background var(--trans),color var(--trans);}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+img{display:block;width:100%;object-fit:cover;}
+::selection{background:var(--accent);color:#fff;}
+.topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;background:rgba(10,10,15,0.75);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);transition:background var(--trans);}
+html[data-theme="light"] .topbar{background:rgba(248,248,252,0.80);}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;letter-spacing:-0.3px;display:flex;align-items:center;gap:8px;}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+.icon-btn{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--dim);display:flex;align-items:center;justify-content:center;transition:border-color var(--trans),color var(--trans);}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent);}
+.icon-btn svg{width:17px;height:17px;}
+.breadcrumb{max-width:1000px;margin:0 auto;padding:18px 28px 0;font-size:13px;color:var(--dim);display:flex;align-items:center;gap:6px;}
+.breadcrumb a:hover{color:var(--accent);}
+.page{max-width:1000px;margin:0 auto;padding:28px 28px 80px;display:grid;grid-template-columns:1fr 320px;gap:32px;}
+.item-thumb{border-radius:var(--radius);overflow:hidden;background:var(--bg2);border:1px solid var(--line);aspect-ratio:16/10;margin-bottom:24px;position:relative;display:flex;align-items:center;justify-content:center;color:var(--line);}
+.item-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.item-thumb svg{width:48px;height:48px;}
+.item-cat{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--accent2);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.item-cat::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.item-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(22px,3.5vw,30px);font-weight:700;line-height:1.15;letter-spacing:-0.5px;margin-bottom:14px;}
+.item-desc{font-size:15px;color:var(--dim);line-height:1.7;margin-bottom:20px;}
+.item-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:24px;}
+.item-tag{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:5px 10px;border-radius:7px;background:var(--bg3);color:var(--dim);border:1px solid var(--line);}
+.item-date{font-size:12.5px;color:var(--dim);font-family:'JetBrains Mono',monospace;}
+.sidebar-card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:sticky;top:80px;}
+.sidebar-card h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:6px;}
+.sidebar-card>p{font-size:13px;color:var(--dim);margin-bottom:20px;line-height:1.5;}
+.btn-primary{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;transition:filter var(--trans),transform var(--trans);margin-bottom:12px;}
+.btn-primary:hover{filter:brightness(1.1);}
+.btn-primary:active{transform:scale(0.98);}
+.btn-primary svg{width:16px;height:16px;}
+.sidebar-note{font-size:12px;color:var(--dim);text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;}
+.sidebar-note svg{width:13px;height:13px;}
+.divider{height:1px;background:var(--line);margin:20px 0;}
+.info-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px;}
+.info-row .label{color:var(--dim);}
+.info-row .val{font-family:'JetBrains Mono',monospace;font-size:12px;}
+.related{max-width:1000px;margin:0 auto;padding:0 28px 80px;}
+.related h2{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:600;margin-bottom:18px;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.rel-card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color var(--trans),transform var(--trans);}
+.rel-card:hover{border-color:rgba(108,99,255,0.5);transform:translateY(-2px);}
+.rel-thumb{aspect-ratio:16/9;background:var(--bg3);position:relative;overflow:hidden;}
+.rel-thumb img{width:100%;height:100%;object-fit:cover;}
+.rel-body{padding:12px 14px;}
+.rel-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.cat-label{position:absolute;top:8px;left:8px;font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:5px;background:rgba(10,10,15,0.7);color:#A89DFF;}
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.72);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:1px solid var(--line);border-radius:20px;width:100%;max-width:460px;overflow:hidden;position:relative;}
+.modal-header{padding:22px 24px 16px;border-bottom:1px solid var(--line);}
+.modal-header h3{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:600;margin-bottom:3px;}
+.modal-header p{font-size:13px;color:var(--dim);}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--bg3);border:none;color:var(--dim);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.modal-close svg{width:15px;height:15px;}
+.stage{display:none;padding:22px 24px 24px;}
+.stage.active{display:block;}
+.btn-watch{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;transition:filter var(--trans);}
+.btn-watch:hover{filter:brightness(1.1);}
+.btn-watch svg{width:16px;height:16px;}
+.ad-area{background:var(--bg3);border:1px dashed var(--line);border-radius:12px;aspect-ratio:16/6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-bottom:18px;color:var(--dim);font-size:12px;font-family:'JetBrains Mono',monospace;}
+.ad-area svg{width:24px;height:24px;opacity:0.4;}
+.countdown-wrap{display:flex;align-items:center;gap:14px;margin-bottom:16px;}
+.ring-wrap{position:relative;width:52px;height:52px;flex-shrink:0;}
+.ring-wrap svg{transform:rotate(-90deg);}
+.ring-wrap circle{fill:none;stroke-width:4;}
+.ring-track{stroke:var(--line);}
+.ring-fill{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset 1s linear;}
+.ring-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:500;}
+.countdown-text{font-size:13.5px;color:var(--dim);line-height:1.5;}
+.btn-download{width:100%;padding:14px;background:var(--green);color:#0A0A0F;border:none;border-radius:12px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:filter var(--trans);}
+.btn-download:hover{filter:brightness(1.07);}
+.btn-download svg{width:16px;height:16px;}
+.unlocked-label{display:flex;align-items:center;justify-content:center;gap:6px;color:var(--green);font-size:13px;font-weight:600;margin-bottom:14px;}
+.unlocked-label svg{width:16px;height:16px;}
+.not-found{text-align:center;padding:80px 24px;}
+@media(max-width:760px){.page{grid-template-columns:1fr;}.sidebar-card{position:static;}.topbar{padding:0 18px;}.breadcrumb,.page,.related{padding-left:18px;padding-right:18px;}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a href="index.html" class="logo"><span class="logo-dot"></span>ProMemer</a>
+  <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
+    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+  </button>
+</header>
+
+<nav class="breadcrumb">
+  <a href="index.html">Home</a>
+  <span>›</span>
+  <span id="bcCat" style="text-transform:capitalize;"></span>
+  <span>›</span>
+  <span id="bcTitle" style="color:var(--text);"></span>
+</nav>
+
+<div class="page" id="page" style="display:none;">
+  <div>
+    <div class="item-thumb" id="itemThumb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+    </div>
+    <div class="item-cat" id="itemCat"></div>
+    <h1 class="item-title" id="itemTitle"></h1>
+    <p class="item-desc" id="itemDesc"></p>
+    <div class="item-tags" id="itemTags"></div>
+    <div class="item-date" id="itemDate"></div>
+  </div>
+  <div>
+    <div class="sidebar-card">
+      <h3>Free download</h3>
+      <p>Watch a short ad to support the site, then your file downloads instantly.</p>
+      <button class="btn-primary" id="sidebarDlBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download free
+      </button>
+      <p class="sidebar-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        No signup required
+      </p>
+      <div class="divider"></div>
+      <div class="info-row"><span class="label">Type</span><span class="val" id="sidebarCat">—</span></div>
+      <div class="info-row"><span class="label">Added</span><span class="val" id="sidebarDate">—</span></div>
+      <div class="info-row"><span class="label">Downloads</span><span class="val" id="sidebarDl">0</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" id="notFound" style="display:none;">
+  <p style="font-size:48px;margin-bottom:16px;">🤔</p>
+  <h2 style="font-family:'Space Grotesk',sans-serif;font-size:22px;margin-bottom:8px;">Item not found</h2>
+  <p style="color:var(--dim);margin-bottom:24px;">This link may be broken or the item was removed.</p>
+  <a href="index.html" style="color:var(--accent);font-weight:600;">← Back to all assets</a>
+</div>
+
+<section class="related" id="relatedSection" style="display:none;">
+  <h2>More like this</h2>
+  <div class="related-grid" id="relatedGrid"></div>
+</section>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-header">
+      <h3 id="modalTitle">Downloading…</h3>
+      <p>A quick ad keeps ProMemer free for everyone.</p>
+    </div>
+    <div class="stage active" id="stagePrompt">
+      <p style="font-size:13.5px;color:var(--dim);margin-bottom:18px;line-height:1.6;">Your download is free. Watch a short ad first — it takes just 15 seconds.</p>
+      <button class="btn-watch" id="btnWatch">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Watch ad &amp; download
+      </button>
+    </div>
+    <div class="stage" id="stageWatching">
+      <div class="ad-area">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        Ad space — paste your Adsterra banner script here
+      </div>
+      <div class="countdown-wrap">
+        <div class="ring-wrap">
+          <svg width="52" height="52">
+            <circle class="ring-track" cx="26" cy="26" r="22"/>
+            <circle class="ring-fill" id="ringFill" cx="26" cy="26" r="22" stroke-dasharray="138.2" stroke-dashoffset="0"/>
+          </svg>
+          <div class="ring-num" id="ringNum">15</div>
+        </div>
+        <p class="countdown-text">Download unlocks automatically when the timer ends.</p>
+      </div>
+      <button class="btn-watch" disabled style="opacity:0.4;cursor:not-allowed;">Unlocking…</button>
+    </div>
+    <div class="stage" id="stageUnlocked">
+      <div class="unlocked-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+        Download unlocked!
+      </div>
+      <button class="btn-download" id="btnDownload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Download now
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const root=document.documentElement;
+const themeBtn=document.getElementById('themeBtn');
+const themeIcon=document.getElementById('themeIcon');
+const MOON='<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+const SUN='<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+let theme=localStorage.getItem('pm-theme')||'dark';
+function applyTheme(t){theme=t;root.setAttribute('data-theme',t);themeIcon.innerHTML=t==='dark'?MOON:SUN;localStorage.setItem('pm-theme',t);}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+const params=new URLSearchParams(window.location.search);
+const itemId=params.get('id');
+let currentItem=null;
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+function fmt(ds){return new Date(ds).toLocaleDateString('en',{year:'numeric',month:'long',day:'numeric'});}
+
+async function init(){
+  const res=await fetch('data/items.json');
+  const all=await res.json();
+  currentItem=all.find(x=>x.id===itemId);
+  if(!currentItem){document.getElementById('notFound').style.display='block';return;}
+
+  const url='https://promemer.top/item.html?id='+currentItem.id;
+  document.getElementById('metaTitle').textContent=currentItem.title+' — ProMemer';
+  document.getElementById('metaDesc').setAttribute('content',currentItem.description);
+  document.getElementById('metaKeys').setAttribute('content',(currentItem.tags||[]).join(', '));
+  document.getElementById('metaCanonical').href=url;
+  document.getElementById('ogTitle').setAttribute('content',currentItem.title);
+  document.getElementById('ogDesc').setAttribute('content',currentItem.description);
+  document.getElementById('ogImage').setAttribute('content',currentItem.thumbnail||'');
+  document.getElementById('ogUrl').setAttribute('content',url);
+  document.getElementById('twTitle').setAttribute('content',currentItem.title);
+  document.getElementById('twDesc').setAttribute('content',currentItem.description);
+  document.getElementById('twImage').setAttribute('content',currentItem.thumbnail||'');
+  document.getElementById('jsonLd').textContent=JSON.stringify({
+    "@context":"https://schema.org","@type":"SoftwareApplication",
+    "name":currentItem.title,"description":currentItem.description,
+    "applicationCategory":"MultimediaApplication","operatingSystem":"Any",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "datePublished":currentItem.date,"keywords":(currentItem.tags||[]).join(', '),
+    "image":currentItem.thumbnail||'',"url":url
+  });
+
+  document.getElementById('bcCat').textContent=currentItem.category;
+  document.getElementById('bcTitle').textContent=currentItem.title;
+  if(currentItem.thumbnail){
+    const img=document.createElement('img');img.src=currentItem.thumbnail;img.alt=currentItem.title;
+    const thumb=document.getElementById('itemThumb');thumb.innerHTML='';thumb.appendChild(img);
+  }
+  document.getElementById('itemCat').textContent=currentItem.category;
+  document.getElementById('itemTitle').textContent=currentItem.title;
+  document.getElementById('itemDesc').textContent=currentItem.description;
+  document.getElementById('itemTags').innerHTML=(currentItem.tags||[]).map(t=>`<span class="item-tag">${esc(t)}</span>`).join('');
+  document.getElementById('itemDate').textContent='Added '+fmt(currentItem.date);
+  document.getElementById('sidebarCat').textContent=currentItem.category;
+  document.getElementById('sidebarDate').textContent=fmt(currentItem.date);
+  document.getElementById('sidebarDl').textContent=(currentItem.downloads||0).toLocaleString();
+  document.getElementById('modalTitle').textContent=currentItem.title;
+  document.getElementById('page').style.display='grid';
+
+  const related=all.filter(x=>x.id!==currentItem.id&&(x.category===currentItem.category||(x.tags||[]).some(t=>(currentItem.tags||[]).includes(t)))).slice(0,4);
+  if(related.length){
+    document.getElementById('relatedSection').style.display='block';
+    document.getElementById('relatedGrid').innerHTML=related.map(it=>`
+      <a href="item.html?id=${esc(it.id)}" class="rel-card">
+        <div class="rel-thumb">
+          ${it.thumbnail?`<img src="${esc(it.thumbnail)}" alt="${esc(it.title)}" loading="lazy">`:''}
+          <span class="cat-label">${esc(it.category)}</span>
+        </div>
+        <div class="rel-body"><p class="rel-title">${esc(it.title)}</p></div>
+      </a>`).join('');
+  }
+}
+
+const overlay=document.getElementById('overlay');
+const stageP=document.getElementById('stagePrompt');
+const stageW=document.getElementById('stageWatching');
+const stageU=document.getElementById('stageUnlocked');
+const ringFill=document.getElementById('ringFill');
+const ringNum=document.getElementById('ringNum');
+const CIRC=138.2;const AD_SEC=15;
+let timer=null;
+function showStage(s){[stageP,stageW,stageU].forEach(el=>el.classList.remove('active'));s.classList.add('active');}
+function openModal(){showStage(stageP);overlay.classList.add('open');}
+function closeModal(){overlay.classList.remove('open');clearInterval(timer);showStage(stageP);}
+document.getElementById('sidebarDlBtn').addEventListener('click',openModal);
+document.getElementById('modalClose').addEventListener('click',closeModal);
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
+document.getElementById('btnWatch').addEventListener('click',()=>{
+  showStage(stageW);let left=AD_SEC;ringNum.textContent=left;ringFill.style.strokeDashoffset='0';
+  timer=setInterval(()=>{left--;ringNum.textContent=left;ringFill.style.strokeDashoffset=String(CIRC*(1-left/AD_SEC));if(left<=0){clearInterval(timer);showStage(stageU);}},1000);
+});
+document.getElementById('btnDownload').addEventListener('click',()=>{if(!currentItem)return;window.location.href=currentItem.file;closeModal();});
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — ProMemer</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0F;--bg2:#111118;--bg3:#18181F;--line:#2A2A38;--text:#F0F0F5;--dim:#70708A;--accent:#6C63FF;--accent2:#A89DFF;--green:#34D399;--coral:#F87171;--radius:14px;--trans:.2s ease;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+button{font-family:inherit;cursor:pointer;}
+::selection{background:var(--accent);color:#fff;}
+
+/* LOGIN SCREEN */
+.login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(ellipse at 50% 0%,rgba(108,99,255,0.15),transparent 60%),var(--bg);
+}
+.login-card{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:36px 32px;width:100%;max-width:380px;}
+.login-card .logo{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:28px;}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+.login-card h2{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px;}
+.login-card p{color:var(--dim);font-size:13.5px;margin-bottom:24px;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12.5px;font-weight:600;color:var(--dim);margin-bottom:7px;}
+.field input{width:100%;background:var(--bg3);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color var(--trans);}
+.field input:focus{border-color:var(--accent);}
+.field input::placeholder{color:#50507A;}
+.btn-login{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin-top:4px;transition:filter var(--trans);}
+.btn-login:hover{filter:brightness(1.1);}
+.login-error{color:var(--coral);font-size:12.5px;margin-top:10px;text-align:center;display:none;}
+
+/* ADMIN LAYOUT */
+.admin{display:none;min-height:100vh;}
+.admin-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;height:60px;
+  background:var(--bg2);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:10;
+}
+.admin-bar .logo{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;}
+.admin-bar-right{display:flex;align-items:center;gap:10px;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(108,99,255,0.15);color:var(--accent2);padding:4px 10px;border-radius:20px;border:1px solid rgba(108,99,255,0.25);}
+.btn-logout{font-size:13px;font-weight:600;color:var(--dim);background:transparent;border:1px solid var(--line);padding:7px 14px;border-radius:8px;transition:border-color var(--trans),color var(--trans);}
+.btn-logout:hover{border-color:var(--coral);color:var(--coral);}
+.btn-home{font-size:13px;font-weight:600;color:var(--dim);background:transparent;border:1px solid var(--line);padding:7px 14px;border-radius:8px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:border-color var(--trans),color var(--trans);}
+.btn-home:hover{border-color:var(--accent);color:var(--accent);}
+.btn-home svg{width:14px;height:14px;}
+
+/* ADMIN BODY */
+.admin-body{max-width:900px;margin:0 auto;padding:32px 28px 80px;display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+.panel h2{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:8px;}
+.panel h2 svg{width:17px;height:17px;color:var(--accent);}
+
+.form-field{margin-bottom:14px;}
+.form-field label{display:block;font-size:12px;font-weight:600;color:var(--dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
+.form-field input,.form-field textarea,.form-field select{
+  width:100%;background:var(--bg3);border:1.5px solid var(--line);border-radius:9px;
+  padding:10px 12px;color:var(--text);font-size:13.5px;font-family:'Inter',sans-serif;outline:none;
+  transition:border-color var(--trans);
+}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--accent);}
+.form-field input::placeholder,.form-field textarea::placeholder{color:#50507A;}
+.form-field textarea{resize:vertical;min-height:80px;}
+.form-field select option{background:var(--bg3);}
+.form-field .hint{font-size:11.5px;color:var(--dim);margin-top:5px;}
+
+.btn-generate{
+  width:100%;padding:12px;
+  background:var(--accent);color:#fff;border:none;border-radius:10px;
+  font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:filter var(--trans);margin-top:4px;
+}
+.btn-generate:hover{filter:brightness(1.1);}
+.btn-generate svg{width:15px;height:15px;}
+
+/* OUTPUT */
+.output-box{
+  background:var(--bg3);border:1px solid var(--line);border-radius:9px;
+  padding:14px;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--accent2);line-height:1.6;min-height:120px;
+  white-space:pre-wrap;word-break:break-all;
+  margin-top:14px;
+}
+.copy-row{display:flex;gap:8px;margin-top:10px;}
+.btn-copy{
+  flex:1;padding:9px;background:var(--bg3);color:var(--text);border:1.5px solid var(--line);
+  border-radius:9px;font-size:13px;font-weight:600;font-family:'Space Grotesk',sans-serif;
+  transition:border-color var(--trans);
+}
+.btn-copy:hover{border-color:var(--accent);}
+.btn-copy.copied{border-color:var(--green);color:var(--green);}
+
+/* ITEMS LIST */
+.items-list{grid-column:1/-1;}
+.items-list .list-header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;
+}
+.items-list h2{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;}
+.items-list h2 svg{width:17px;height:17px;color:var(--accent);}
+.item-row{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:13px 16px;background:var(--bg3);border:1px solid var(--line);
+  border-radius:10px;margin-bottom:8px;
+}
+.item-row:last-child{margin-bottom:0;}
+.item-row-left{display:flex;align-items:center;gap:12px;min-width:0;}
+.item-row-thumb{width:48px;height:36px;border-radius:6px;background:var(--bg2);overflow:hidden;flex-shrink:0;}
+.item-row-thumb img{width:100%;height:100%;object-fit:cover;}
+.item-row-info{min-width:0;}
+.item-row-title{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+.item-row-meta{font-size:11.5px;color:var(--dim);font-family:'JetBrains Mono',monospace;}
+.item-row-actions{display:flex;gap:7px;flex-shrink:0;}
+.btn-sm{padding:6px 12px;border-radius:7px;font-size:12px;font-weight:600;border:none;display:flex;align-items:center;gap:5px;transition:filter var(--trans);}
+.btn-sm svg{width:12px;height:12px;}
+.btn-view{background:rgba(108,99,255,0.12);color:var(--accent);}
+.btn-view:hover{filter:brightness(1.2);}
+.btn-del{background:rgba(248,113,113,0.12);color:var(--coral);}
+.btn-del:hover{filter:brightness(1.2);}
+.empty-list{text-align:center;padding:40px 0;color:var(--dim);font-size:13.5px;}
+
+/* INSTRUCTIONS */
+.instructions{grid-column:1/-1;background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.2);border-radius:var(--radius);padding:20px 22px;}
+.instructions h3{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;color:var(--accent2);margin-bottom:10px;}
+.instructions ol{padding-left:18px;color:var(--dim);font-size:13px;line-height:2;}
+.instructions code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--accent2);}
+
+@media(max-width:680px){
+  .admin-body{grid-template-columns:1fr;padding:20px 18px 60px;}
+  .items-list{grid-column:1;}
+  .instructions{grid-column:1;}
+  .admin-bar{padding:0 18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="logo"><span class="logo-dot"></span>ProMemer</div>
+    <h2>Admin panel</h2>
+    <p>Enter your password to manage content.</p>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="passInput" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-login" id="loginBtn">Sign in</button>
+    <div class="login-error" id="loginError">Wrong password. Try again.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin" id="adminPanel">
+  <div class="admin-bar">
+    <div class="logo"><span class="logo-dot"></span>ProMemer <span class="badge">Admin</span></div>
+    <div class="admin-bar-right">
+      <a href="index.html" class="btn-home" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View site
+      </a>
+      <button class="btn-logout" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- ADD NEW ITEM -->
+    <div class="panel">
+      <h2>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        New item
+      </h2>
+
+      <div class="form-field">
+        <label>Title *</label>
+        <input type="text" id="fTitle" placeholder="e.g. Drake Pointing Blank Template">
+      </div>
+      <div class="form-field">
+        <label>Description *</label>
+        <textarea id="fDesc" placeholder="Describe the file — what it is, resolution, format, use case…"></textarea>
+      </div>
+      <div class="form-field">
+        <label>Category *</label>
+        <select id="fCat">
+          <option value="image">Image</option>
+          <option value="video">Video</option>
+          <option value="audio">Audio</option>
+          <option value="template">Template</option>
+          <option value="tool">Tool</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Tags (comma separated)</label>
+        <input type="text" id="fTags" placeholder="meme template, png, reaction, free">
+      </div>
+      <div class="form-field">
+        <label>File URL *</label>
+        <input type="url" id="fFile" placeholder="https://raw.githubusercontent.com/you/repo/main/files/file.zip">
+        <div class="hint">GitHub raw file link, Google Drive direct link, or any CDN URL.</div>
+      </div>
+      <div class="form-field">
+        <label>Thumbnail URL</label>
+        <input type="url" id="fThumb" placeholder="https://… (optional, leave blank to use placeholder)">
+      </div>
+      <button class="btn-generate" id="generateBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+        Generate JSON entry
+      </button>
+
+      <div class="output-box" id="outputBox">Fill in the form above and click Generate.</div>
+      <div class="copy-row">
+        <button class="btn-copy" id="copyBtn">Copy entry</button>
+      </div>
+    </div>
+
+    <!-- INSTRUCTIONS -->
+    <div class="panel">
+      <h2>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        How to publish
+      </h2>
+      <div style="color:var(--dim);font-size:13.5px;line-height:1.8;">
+        <p style="margin-bottom:12px;">This site uses a simple <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--accent2);">data/items.json</code> file to store all your content. No database needed.</p>
+        <ol style="padding-left:18px;">
+          <li>Fill in the form and click <strong>Generate JSON entry</strong>.</li>
+          <li>Copy the generated entry.</li>
+          <li>Open <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--accent2);">data/items.json</code> in your GitHub repo.</li>
+          <li>Add the new entry inside the <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--bg3);padding:2px 6px;border-radius:4px;color:var(--accent2);">[ ]</code> array (add a comma between entries).</li>
+          <li>Commit the file. Cloudflare Pages auto-deploys in ~30 seconds.</li>
+        </ol>
+        <div style="margin-top:16px;padding:12px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:9px;font-size:12.5px;color:#34D399;">
+          💡 Upload your actual files (images, videos, zips) directly to the GitHub repo under a <code style="font-family:'JetBrains Mono',monospace;background:rgba(0,0,0,0.2);padding:1px 5px;border-radius:3px;">files/</code> folder. Then use the raw GitHub URL as the File URL above.
+        </div>
+      </div>
+    </div>
+
+    <!-- CURRENT ITEMS -->
+    <div class="panel items-list">
+      <div class="list-header">
+        <h2>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Published items
+        </h2>
+        <span id="itemCountBadge" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);"></span>
+      </div>
+      <div id="itemsList"><div class="empty-list">Loading…</div></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ===== Password (change this to something only you know) =====
+// IMPORTANT: change this before deploying to GitHub!
+const ADMIN_PASSWORD = 'promemer2026';
+
+const loginScreen = document.getElementById('loginScreen');
+const adminPanel  = document.getElementById('adminPanel');
+const passInput   = document.getElementById('passInput');
+const loginError  = document.getElementById('loginError');
+
+function checkSession(){
+  if(sessionStorage.getItem('pm-admin')==='1'){
+    loginScreen.style.display='none';
+    adminPanel.style.display='block';
+    loadItems();
+  }
+}
+checkSession();
+
+document.getElementById('loginBtn').addEventListener('click', login);
+passInput.addEventListener('keydown', e=>{ if(e.key==='Enter') login(); });
+
+function login(){
+  if(passInput.value === ADMIN_PASSWORD){
+    sessionStorage.setItem('pm-admin','1');
+    loginScreen.style.display='none';
+    adminPanel.style.display='block';
+    loginError.style.display='none';
+    loadItems();
+  } else {
+    loginError.style.display='block';
+    passInput.value='';
+    passInput.focus();
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click',()=>{
+  sessionStorage.removeItem('pm-admin');
+  location.reload();
+});
+
+// ===== Generate JSON entry =====
+let lastGenerated = null;
+let nextId = '001';
+
+async function loadItems(){
+  try{
+    const res = await fetch('data/items.json?_='+Date.now());
+    const all = await res.json();
+    document.getElementById('itemCountBadge').textContent = all.length + ' items';
+    const maxId = all.reduce((m,it)=>Math.max(m,parseInt(it.id)||0),0);
+    nextId = String(maxId+1).padStart(3,'0');
+
+    const listEl = document.getElementById('itemsList');
+    if(!all.length){
+      listEl.innerHTML='<div class="empty-list">No items yet — add your first one!</div>';
+      return;
+    }
+    listEl.innerHTML = all.map(it=>`
+      <div class="item-row">
+        <div class="item-row-left">
+          <div class="item-row-thumb">
+            ${it.thumbnail?`<img src="${esc(it.thumbnail)}" alt="">`:''}
+          </div>
+          <div class="item-row-info">
+            <div class="item-row-title">${esc(it.title)}</div>
+            <div class="item-row-meta">${esc(it.id)} · ${esc(it.category)} · ${it.downloads||0} dl</div>
+          </div>
+        </div>
+        <div class="item-row-actions">
+          <a href="item.html?id=${esc(it.id)}" target="_blank" class="btn-sm btn-view">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+            View
+          </a>
+        </div>
+      </div>
+    `).join('');
+  } catch(e){
+    document.getElementById('itemsList').innerHTML='<div class="empty-list">Could not load items.json</div>';
+  }
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;}
+
+document.getElementById('generateBtn').addEventListener('click',()=>{
+  const title = document.getElementById('fTitle').value.trim();
+  const desc  = document.getElementById('fDesc').value.trim();
+  const cat   = document.getElementById('fCat').value;
+  const tags  = document.getElementById('fTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const file  = document.getElementById('fFile').value.trim();
+  const thumb = document.getElementById('fThumb').value.trim();
+
+  if(!title||!desc||!file){
+    document.getElementById('outputBox').textContent='⚠ Title, description and file URL are required.';
+    document.getElementById('outputBox').style.color='var(--coral)';
+    return;
+  }
+
+  lastGenerated = {
+    id: nextId,
+    title, description:desc, tags, category:cat,
+    file, thumbnail:thumb||null,
+    date: new Date().toISOString().split('T')[0],
+    downloads: 0
+  };
+
+  document.getElementById('outputBox').style.color='var(--accent2)';
+  document.getElementById('outputBox').textContent = JSON.stringify(lastGenerated, null, 2);
+});
+
+document.getElementById('copyBtn').addEventListener('click',()=>{
+  const text = document.getElementById('outputBox').textContent;
+  if(!text || text.startsWith('Fill') || text.startsWith('⚠')) return;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn = document.getElementById('copyBtn');
+    btn.textContent='Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy entry';btn.classList.remove('copied');},2000);
+  });
+});
+</script>
+</body>
+</html>
